@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import Carousel from "react-bootstrap/Carousel";
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -9,22 +11,47 @@ class BestBooks extends React.Component {
   }
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
+  ComponentDidMount=()=>{
+    axios.get(`http://localhost:3001/book`)
+    .then(result=>{
+      this.setState({
+        books:result.data,
+      });
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+  }
 
+ 
   render() {
 
     /* TODO: render all the books in a Carousel */
 
     return (
-      <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
+      <div>
         {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
-        ) : (
-          <h3>No Books Found :(</h3>
-        )}
-      </>
-    )
+            <Carousel fade>
+              {this.state.books.map((item) => {
+                return(
+                <Carousel.Item>
+                  <img src="https://play-lh.googleusercontent.com/DmpYQrVcldrDuz5uyATqGbNvTALsJ1Bg3fpXM0p-VsRNM19osEB9-_ByvdjSbTvZQg=w450-h300-rw"/>
+                  <Carousel.Caption>
+                    <h2>{item.title}</h2>
+                    <h5>{item.discription}</h5>
+                    <h5>{item.status}</h5>
+                  </Carousel.Caption>
+                </Carousel.Item>
+                 ); 
+                }
+              )
+           }
+            </Carousel>) : ( <h3>No Books Found :( </h3>
+            )
+          }
+            
+      </div>
+    );
   }
 }
 
