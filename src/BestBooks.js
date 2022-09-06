@@ -1,30 +1,29 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from "react-bootstrap/Carousel";
-import BookFormModal from './BookFormModal';
-
 
 class BestBooks extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: [],
-    };
+constructor(props){
+  super(props);
+  this.state = {
+    bookArr : []
   }
+}
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
-  ComponentDidMount=()=>{
-    axios.get(`http://localhost:3001/book`)
-    .then(result=>{
+  componentDidMount = () => {
+    axios
+    .get(`http://localhost:3001/book`)
+    .then(result =>{
+      console.log(result.data);
       this.setState({
-        books:result.data,
-      });
+        bookArr : result.data
+      })
     })
     .catch(err=>{
       console.log(err);
-    });
+    })
+    
   }
-
 
  
   render() {
@@ -32,30 +31,28 @@ class BestBooks extends React.Component {
     /* TODO: render all the books in a Carousel */
 
     return (
-      <div>
-        <BookFormModal />
-        {this.state.books.length ? (
+      <>
+        {this.state.bookArr.length ? 
             <Carousel fade>
-              {this.state.books.map((item) => {
+              {this.state.bookArr.map(item => {
                 return(
-                <Carousel.Item>
-                  <img src="https://play-lh.googleusercontent.com/DmpYQrVcldrDuz5uyATqGbNvTALsJ1Bg3fpXM0p-VsRNM19osEB9-_ByvdjSbTvZQg=w450-h300-rw"/>
-                  <Carousel.Caption>
-                    <h2>{item.title}</h2>
-                    <h5>{item.discription}</h5>
-                    <h5>{item.status}</h5>
-                  </Carousel.Caption>
-                </Carousel.Item>
-                 ); 
-                }
-              )
-           }
-            </Carousel>) : ( <h3>No Books Found :( </h3>
+                  <Carousel.Item>
+                    <img class="d-block w-100" height="480" src={require("./bg_slide.jpg")} alt="Slide"/>
+                    <Carousel.Caption>
+                        <h3>Book title: {item.title}</h3>
+                        <p>Book discription:{item.discription}</p>
+                        <p>Book status :{item.status}</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                )
+              }
             )
           }
-            
-      </div>
-    );
+          </Carousel>
+          : <h3>No Books Found </h3> 
+        }
+      </>
+   );
   }
 }
 
