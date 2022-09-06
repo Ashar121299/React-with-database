@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import Carousel from "react-bootstrap/Carousel";
+import BookFormModal from './BookFormModal';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
-    }
+      books: [],
+    };
   }
 
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
@@ -23,6 +25,7 @@ class BestBooks extends React.Component {
     });
   }
 
+
  
   render() {
 
@@ -30,6 +33,7 @@ class BestBooks extends React.Component {
 
     return (
       <div>
+        <BookFormModal />
         {this.state.books.length ? (
             <Carousel fade>
               {this.state.books.map((item) => {

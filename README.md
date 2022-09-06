@@ -1,34 +1,43 @@
 # Project Name
 
-**Author**: Team Member Names Goes Here
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Author**: Ashar Momani 
+**Version**: 2.2.0 
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+_*when we have a large number of books we should to rearrange it to dealing with them easily also we can make a short discription about each book to know a main idea in this book so this application is designed to represent books with thier title and discription and the status*_
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
-
+_*first you should add book in promot section after that it will be stored in database and rendered on the screen*_
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+we will use the javascript langouge to build frontend and backend sides and we will use mongoDB to store,update,delete data 
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+04-09-2022 10:52pm - Application now has functional express server, with a GET route for the render book information
+06-09-2022 4:00am - Application now has functional express server, with a post,delete routes for to add new book in database and render it a gian and delete it when the user want.
 
 ## Estimates
 <!-- See below -->
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+[Trello !](https://trello.com/b/h07brQlH/book)
 
-Name of feature: ________________________________
+Name of feature: ___render data _____________________________
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: _3 houres____
 
-Start time: _____
+Start time: __3:00 pm___
 
-Finish time: _____
+Finish time: _6:00 pm____
 
-Actual time needed to complete: _____
+Actual time needed to complete: __more than 5 houres___
+
+Name of feature: ___add and delete data _____________________________
+
+Estimate of time needed to complete: _4 houres____
+
+Start time: __3:00 pm___
+
+Finish time: _7:00 pm____
+
+Actual time needed to complete: __more than 6 houres___
+
