@@ -15,7 +15,7 @@ class BestBooks extends React.Component {
   
     componentDidMount = () => {
       axios
-      .get(`http://localhost:3001/book`)
+      .get(`https://class12backend.herokuapp.com/book`)
       .then(result =>{
         console.log(result.data);
         this.setState({
@@ -40,7 +40,7 @@ class BestBooks extends React.Component {
       }
   
       axios
-      .post(`http://localhost:3001/book`, obj)
+      .post(`https://class12backend.herokuapp.com/book`, obj)
       .then(result =>{
         this.setState({
           bookArr : result.data
@@ -53,7 +53,7 @@ class BestBooks extends React.Component {
 
     deleteBook = (id) => {
       axios
-        .delete(`http://localhost:3001/book/${id}`)
+        .delete(`https://class12backend.herokuapp.com/book/${id}`)
         .then((result) => {
           console.log('done');
           
