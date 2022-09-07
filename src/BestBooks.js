@@ -77,9 +77,6 @@ class BestBooks extends React.Component {
 
     return (
       
-        
-      
-      
       <>
       <Modal.Dialog>
       <Modal.Header closeButton>
