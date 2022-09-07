@@ -30,15 +30,13 @@ class BestBooks extends React.Component {
 
 
     addBook = (event) =>{
-      //event.preventDefault();
-      
+      event.preventDefault();
       const obj = {
         title : event.target.title.value,
         discription: event.target.discription.value,
         status: event.target.status.value,
 
       }
-  
       axios
       .post(`https://class12backend.herokuapp.com/book`, obj)
       .then(result =>{
@@ -50,7 +48,7 @@ class BestBooks extends React.Component {
         console.log(err);
       })
     }
-
+  
     deleteBook = (id) => {
       axios
         .delete(`https://class12backend.herokuapp.com/book/${id}`)
@@ -75,11 +73,8 @@ class BestBooks extends React.Component {
 
     /* TODO: render all the books in a Carousel */
 
-    return (
-      
-        
-      
-      
+    return ( 
+
       <>
       <Modal.Dialog>
       <Modal.Header closeButton>
