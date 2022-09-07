@@ -5,72 +5,70 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-
-
-
 class BestBooks extends React.Component {
-constructor(props){
-  super(props);
-  this.state = {
-    bookArr : []
+  constructor(props){
+    super(props);
+    this.state = {
+      bookArr : []
+    }
   }
-}
-
-  componentDidMount = () => {
-    axios
-    .get(`http://localhost:3001/book`)
-    .then(result =>{
-      console.log(result.data);
-      this.setState({
-        bookArr : result.data
+  
+    componentDidMount = () => {
+      axios
+      .get(`http://localhost:3001/book`)
+      .then(result =>{
+        console.log(result.data);
+        this.setState({
+          bookArr : result.data
+        })
       })
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-    
-  }
-
-
-
-  addBook = (event) =>{
-    event.preventDefault();
-    
-    const obj = {
-      title : event.target.title.value,
-      discription : event.target.discription.value,
-      status : event.target.status.value
+      .catch(err=>{
+        console.log(err);
+      })
+      
     }
 
-    axios
-    .post(`http://localhost:3001/book`, obj)
-    .then(result =>{
-      this.setState({
-        bookArr : result.data,
-        
-      })
-      console.log('done');
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  };
 
-  deleteBook = (id) => {
-    axios
-      .delete(`https://localhost:3001/book/${id}`)
-      .then((result) => {
-        this.setState({
-          bookArr: result.data,
-        });
-
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+    addBook = (event) =>{
+      //event.preventDefault();
       
-    };
+      const obj = {
+        title : event.target.title.value,
+        discription: event.target.discription.value,
+        status: event.target.status.value,
+
+      }
+  
+      axios
+      .post(`http://localhost:3001/book`, obj)
+      .then(result =>{
+        this.setState({
+          bookArr : result.data
+        })
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    }
+
+    deleteBook = (id) => {
+      axios
+        .delete(`http://localhost:3001/book/${id}`)
+        .then((result) => {
+          console.log('done');
+          
+          this.setState({
+            bookArr: result.data,
+          });
+          this.componentDidMount();
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  
+        
+      };
 
  
   render() {
