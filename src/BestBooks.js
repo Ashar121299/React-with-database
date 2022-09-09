@@ -7,8 +7,6 @@ import Modal from 'react-bootstrap/Modal';
 import UpdateForm from './UpdateForm';
 
 
-
-
 class BestBooks extends React.Component {
   constructor(props){
     super(props);
@@ -37,12 +35,14 @@ class BestBooks extends React.Component {
 
     addBook = (event) =>{
       event.preventDefault();
+      
       const obj = {
         title : event.target.title.value,
         discription: event.target.discription.value,
         status: event.target.status.value,
 
       }
+  
       axios
       .post(`https://class12backend.herokuapp.com/book`, obj)
       .then(result =>{
@@ -54,7 +54,7 @@ class BestBooks extends React.Component {
         console.log(err);
       })
     }
-  
+
     deleteBook = (id) => {
       axios
         .delete(`https://class12backend.herokuapp.com/book/${id}`)
@@ -110,6 +110,8 @@ class BestBooks extends React.Component {
 
  
   render() {
+
+    return (
       <>
       
       <Modal.Dialog>
@@ -139,8 +141,7 @@ class BestBooks extends React.Component {
         
       </Modal.Footer>
     </Modal.Dialog>
-    
-      
+
         {this.state.bookArr.length ? 
             <Carousel fade>
               {this.state.bookArr.map(item => {
@@ -170,10 +171,6 @@ class BestBooks extends React.Component {
                   updateBook= {this.updateBook}
                   currentBook = {this.state.currentBook}
                   />
-                
-        
-       
-        
       </>
     
    );
