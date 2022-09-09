@@ -4,12 +4,18 @@ import Carousel from "react-bootstrap/Carousel";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import UpdateForm from './UpdateForm';
+
+
+
 
 class BestBooks extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      bookArr : []
+      bookArr : [],
+      showFlag : false,
+    currentBook : {}
     }
   }
   
@@ -30,7 +36,7 @@ class BestBooks extends React.Component {
 
 
     addBook = (event) =>{
-      //event.preventDefault();
+      event.preventDefault();
       
       const obj = {
         title : event.target.title.value,
@@ -69,15 +75,47 @@ class BestBooks extends React.Component {
   
         
       };
+      openForm = (id) =>{
+        this.setState({
+          showFlag : true,
+          currentBook : id
+        })
+      }
+    
+      handleClose = () =>{
+        this.setState({
+          showFlag : false
+        })
+      }
+    
+      updateBook = (event) =>{
+        event.preventDefault();
+        let currentBookData = {
+          title : event.target.title.value,
+          discription : event.target.discription.value,
+          status : event.target.status.value
+        }
+        const id = this.state.currentBook;
+        axios
+        .put(`https://class12backend.herokuapp.com/book/${id}`, currentBookData)
+        .then(result=>{
+          this.setState({
+            bookArr : result.data
+          })
+          this.handleClose();
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      }
+
 
  
   render() {
 
-    /* TODO: render all the books in a Carousel */
-
     return (
-      
       <>
+      
       <Modal.Dialog>
       <Modal.Header closeButton>
         <Modal.Title>AddBook</Modal.Title>
@@ -105,11 +143,13 @@ class BestBooks extends React.Component {
         
       </Modal.Footer>
     </Modal.Dialog>
+    
       
         {this.state.bookArr.length ? 
             <Carousel fade>
               {this.state.bookArr.map(item => {
                 return(
+                 
                   <Carousel.Item>
                     <img class="d-block w-100" height="480" src={require("./bg_slide.jpg")} alt="Slide"/>
                     <Carousel.Caption>
@@ -117,19 +157,31 @@ class BestBooks extends React.Component {
                         <p>Book discription:{item.discription}</p>
                         <p>Book status :{item.status}</p>
                         <Button  onClick={() => this.deleteBook(item._id)}>Delete</Button>
+                        <Button onClick={() => this.openForm(item._id)}>update</Button>
                     </Carousel.Caption>
                   </Carousel.Item>
+                
                 )
               }
             )
           }
           </Carousel>
           : <h3>No Books Found </h3> 
-        }
+        } 
+        <UpdateForm
+                  show = {this.state.showFlag}
+                  handleClose = {this.handleClose}
+                  updateBook= {this.updateBook}
+                  currentBook = {this.state.currentBook}
+                  />
+                
+        
+       
+        
       </>
     
    );
   }
 }
 
-export default BestBooks;
+export default BestBooks ;
