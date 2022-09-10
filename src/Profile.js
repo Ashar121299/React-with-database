@@ -6,7 +6,7 @@ class Profile extends Component {
     const { user } = this.props.auth0;
     return <div>
         <p>Hello {user.name}</p>
-        <p>Email {user.email}</p>
+       
         
         
         

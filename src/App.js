@@ -11,6 +11,7 @@ import {
 
 import Profile from './Profile';
 import { withAuth0 } from '@auth0/auth0-react';
+import Welcome from './Welcome';
 
 class App extends React.Component {
   
@@ -24,7 +25,11 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks />}
+              element={isAuthenticated?<BestBooks />:
+              < Welcome />
+
+            }
+              
             >
             </Route>
             <Route 

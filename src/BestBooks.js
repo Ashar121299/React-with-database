@@ -51,7 +51,7 @@ class BestBooks extends React.Component {
       axios
       .post(`https://class12backend.herokuapp.com/book`, obj)
       .then(result =>{
-        this.setState({
+        return this.setState({
           bookArr : result.data
         })
       })
@@ -125,7 +125,7 @@ class BestBooks extends React.Component {
     return (
       
       <>
-      {isAuthenticated && 
+      
       <div>
         <Modal.Dialog>
       <Modal.Header closeButton>
@@ -192,7 +192,7 @@ class BestBooks extends React.Component {
       
       
       
-      }
+      
       
      
       
