@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import UpdateForm from './UpdateForm';
+import { withAuth0 } from '@auth0/auth0-react';
 
 
 
@@ -20,8 +21,9 @@ class BestBooks extends React.Component {
   }
   
     componentDidMount = () => {
+      const { user } = this.props.auth0;
       axios
-      .get(`https://class12backend.herokuapp.com/book`)
+      .get(`https://class12backend.herokuapp.com/book?name=${user.email}`)
       .then(result =>{
         console.log(result.data);
         this.setState({
@@ -37,11 +39,12 @@ class BestBooks extends React.Component {
 
     addBook = (event) =>{
       event.preventDefault();
-      
+      const { user } = this.props.auth0;
       const obj = {
         title : event.target.title.value,
         discription: event.target.discription.value,
         status: event.target.status.value,
+        name:user.email
 
       }
   
@@ -58,8 +61,9 @@ class BestBooks extends React.Component {
     }
 
     deleteBook = (id) => {
+      const { user } = this.props.auth0;
       axios
-        .delete(`https://class12backend.herokuapp.com/book/${id}`)
+        .delete(`https://class12backend.herokuapp.com/book/${id}?name=${user.email}`)
         .then((result) => {
           console.log('done');
           
@@ -90,10 +94,12 @@ class BestBooks extends React.Component {
     
       updateBook = (event) =>{
         event.preventDefault();
+        const { user } = this.props.auth0;
         let currentBookData = {
           title : event.target.title.value,
           discription : event.target.discription.value,
-          status : event.target.status.value
+          status : event.target.status.value,
+          name:user.email
         }
         const id = this.state.currentBook;
         axios
@@ -112,11 +118,16 @@ class BestBooks extends React.Component {
 
  
   render() {
+    const { isAuthenticated } = this.props.auth0;
+   
+
 
     return (
-      <>
       
-      <Modal.Dialog>
+      <>
+      {isAuthenticated && 
+      <div>
+        <Modal.Dialog>
       <Modal.Header closeButton>
         <Modal.Title>AddBook</Modal.Title>
       </Modal.Header>
@@ -176,6 +187,15 @@ class BestBooks extends React.Component {
                   />
                 
         
+
+      </div>
+      
+      
+      
+      }
+      
+     
+      
        
         
       </>
@@ -184,4 +204,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks ;
+export default withAuth0(BestBooks) ;
