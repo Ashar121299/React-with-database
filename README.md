@@ -41,3 +41,13 @@ Finish time: _7:00 pm____
 
 Actual time needed to complete: __more than 6 houres___
 
+Name of feature: ___update and add Authentication  _____________________________
+
+Estimate of time needed to complete: _5 houres____
+
+Start time: __3:00 pm___
+
+Finish time: _8:00 pm____
+
+Actual time needed to complete: __4 houres___
+
