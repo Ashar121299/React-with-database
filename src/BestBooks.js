@@ -21,9 +21,9 @@ class BestBooks extends React.Component {
   }
   
     componentDidMount = () => {
-      const { user } = this.props.auth0;
+      //const { user } = this.props.auth0;
       axios
-      .get(`https://class12backend.herokuapp.com/book?name=${user.email}`)
+      .get(`https://class12backend.herokuapp.com/book`)
       .then(result =>{
         console.log(result.data);
         this.setState({
