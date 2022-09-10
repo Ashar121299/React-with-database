@@ -1,6 +1,6 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
-import "./styles/Welcome.css";
+
 
 class Welcome extends React.Component {
   render() {
